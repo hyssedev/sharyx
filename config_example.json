@@ -1,6 +1,6 @@
 {
     "SECRET_KEY": "",
-    "allowed_extensions": [
+    "ALLOWED_CONTENT_TYPES": [
         "image/jpeg",
         "image/png"
     ]
