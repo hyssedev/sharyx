@@ -130,11 +130,10 @@ STATIC_URL = 'static/'
 DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
 
 UPLOADS_DIR = 'uploads/'
-IMAGES_DIR = f'{UPLOADS_DIR}/images/'
+
+UPLOADS_PATH = os.path.join(BASE_DIR, UPLOADS_DIR)
 
 # Checking if the uploads directory exists or not
 if not os.path.isdir(os.path.join(BASE_DIR, UPLOADS_DIR)):
     # todo: add logger
     os.mkdir(os.path.join(BASE_DIR, UPLOADS_DIR))
-    if not os.path.isdir(os.path.join(BASE_DIR, IMAGES_DIR)):
-        os.mkdir(os.path.join(BASE_DIR, IMAGES_DIR))
