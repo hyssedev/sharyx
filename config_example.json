@@ -1,0 +1,7 @@
+{
+    "SECRET_KEY": "",
+    "allowed_extensions": [
+        "image/jpeg",
+        "image/png"
+    ]
+}
