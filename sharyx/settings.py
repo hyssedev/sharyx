@@ -10,12 +10,12 @@ For the full list of settings and their values, see
 https://docs.djangoproject.com/en/4.1/ref/settings/
 """
 
-import json
+import json, os
 from pathlib import Path
 
 # Config
 with open("config.json") as file:
-    config = json.load(file)
+    CONFIG = json.load(file)
 
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
 BASE_DIR = Path(__file__).resolve().parent.parent
@@ -25,7 +25,7 @@ BASE_DIR = Path(__file__).resolve().parent.parent
 # See https://docs.djangoproject.com/en/4.1/howto/deployment/checklist/
 
 # SECURITY WARNING: keep the secret key used in production secret!
-SECRET_KEY = config['SECRET_KEY']
+SECRET_KEY = CONFIG['SECRET_KEY']
 
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
@@ -128,3 +128,13 @@ STATIC_URL = 'static/'
 # https://docs.djangoproject.com/en/4.1/ref/settings/#default-auto-field
 
 DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
+
+UPLOADS_DIR = 'uploads/'
+IMAGES_DIR = f'{UPLOADS_DIR}/images/'
+
+# Checking if the uploads directory exists or not
+if not os.path.isdir(os.path.join(BASE_DIR, UPLOADS_DIR)):
+    # todo: add logger
+    os.mkdir(os.path.join(BASE_DIR, UPLOADS_DIR))
+    if not os.path.isdir(os.path.join(BASE_DIR, IMAGES_DIR)):
+        os.mkdir(os.path.join(BASE_DIR, IMAGES_DIR))
