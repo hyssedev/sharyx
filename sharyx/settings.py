@@ -133,6 +133,8 @@ UPLOADS_DIR = 'uploads/'
 
 UPLOADS_PATH = os.path.join(BASE_DIR, UPLOADS_DIR)
 
+MEDIA_ROOT =  UPLOADS_PATH
+
 # Checking if the uploads directory exists or not
 if not os.path.isdir(os.path.join(BASE_DIR, UPLOADS_DIR)):
     # todo: add logger
