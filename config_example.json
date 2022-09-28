@@ -3,5 +3,6 @@
     "ALLOWED_CONTENT_TYPES": [
         "image/jpeg",
         "image/png"
-    ]
+    ],
+    "MAX_FILE_SIZE": 52428800
 }
