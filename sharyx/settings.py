@@ -12,6 +12,7 @@ https://docs.djangoproject.com/en/4.1/ref/settings/
 
 import json, os
 from pathlib import Path
+from loguru import logger
 
 # Config
 with open("config.json") as file:
@@ -137,7 +138,13 @@ MEDIA_ROOT =  BASE_DIR
 
 MEDIA_URL = '/'
 
+logger.add('logs.log', rotation="100MB", 
+                    format="{time:YYYY-MM-DD at HH:mm:ss} | {name}:{line} | {level} - {message}",
+                    enqueue=True, backtrace=True, diagnose=True)
+
+logger.info("logger started")
+
 # Checking if the uploads directory exists or not
 if not os.path.isdir(os.path.join(BASE_DIR, UPLOADS_DIR)):
-    # TODO: add logger
     os.mkdir(os.path.join(BASE_DIR, UPLOADS_DIR))
+    logger.info("created upload directory")
