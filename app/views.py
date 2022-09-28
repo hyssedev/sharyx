@@ -23,8 +23,9 @@ class upload(generics.ListCreateAPIView):
     def post(self, request):
         uploaded_file = request.data['file']
 
+        if not uploaded_file: return JsonResponse({"detail":"file is none"}, status=status.HTTP_400_BAD_REQUEST)
         # checking if the size of the uploaded_file is under 50MB
-        if uploaded_file.size > CONFIG['MAX_FILE_SIZE']: return JsonResponse({"detailt":"file size too large."}, status=status.HTTP_413_REQUEST_ENTITY_TOO_LARGE)
+        if uploaded_file.size > CONFIG['MAX_FILE_SIZE']: return JsonResponse({"detail":"file size too large."}, status=status.HTTP_413_REQUEST_ENTITY_TOO_LARGE)
         # checking if the uploaded_file has a supported content type
         if uploaded_file.content_type not in CONFIG['ALLOWED_CONTENT_TYPES']: return JsonResponse({"detail":"content type not allowed."}, status=status.HTTP_415_UNSUPPORTED_MEDIA_TYPE)
 
