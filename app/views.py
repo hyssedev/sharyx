@@ -42,9 +42,12 @@ class delete(generics.ListCreateAPIView):
     def get(self, request, code):
         try:
             object = Uploads.objects.get(delete_code=code)
-            object.delete()
+            try:
+                object.delete()
+            except:
+                return JsonResponse({"detail":"error trying to delete file."})
         except:
-            return JsonResponse({"detail":"incorrect code or error trying to delete file."})
+            return JsonResponse({"detail":"incorrect code."})
         return JsonResponse({"detail":"succesfully deleted file."})
 
     def post(self, request):
