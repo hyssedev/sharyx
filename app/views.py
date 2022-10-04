@@ -6,6 +6,7 @@ from rest_framework.parsers import MultiPartParser
 from rest_framework import generics, status
 from sharyx.settings import CONFIG, UPLOADS_PATH
 from app.utils import upload_file
+from app.models import Uploads
 
 class upload(generics.ListCreateAPIView):
     # TODO crypt it, hash it or smth
@@ -33,4 +34,18 @@ class upload(generics.ListCreateAPIView):
         file = upload_file(uploaded_file)
 
         # returning the url for the uploaded_file
-        return JsonResponse({"url":f"{request.scheme}://{request.get_host()}/uploads/{file[1]}"})
+        return JsonResponse({"url":f"{request.scheme}://{request.get_host()}/uploads/{file[1]}", "delete_url":f"{request.scheme}://{request.get_host()}/delete/{file[3]}"})
+
+class delete(generics.ListCreateAPIView):
+    renderer_classes = [JSONRenderer]
+
+    def get(self, request, code):
+        try:
+            object = Uploads.objects.get(delete_code=code)
+            object.delete()
+        except:
+            return JsonResponse({"detail":"incorrect code or error trying to delete file."})
+        return JsonResponse({"detail":"succesfully deleted file."})
+
+    def post(self, request):
+        return JsonResponse({"detail":"Method POST not allowed."}, status=status.HTTP_405_METHOD_NOT_ALLOWED)
