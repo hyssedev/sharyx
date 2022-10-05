@@ -20,6 +20,7 @@ from django.urls import path
 from app import views
 
 urlpatterns = [
+    path('', views.index, name="index"),
     path('admin/', admin.site.urls),
     path('upload/', views.upload.as_view(), name="upload"),
     path('delete/<code>', views.delete.as_view(), name="delete"),

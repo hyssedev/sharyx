@@ -52,3 +52,6 @@ class delete(generics.ListCreateAPIView):
 
     def post(self, request):
         return JsonResponse({"detail":"Method POST not allowed."}, status=status.HTTP_405_METHOD_NOT_ALLOWED)
+
+def index(request):
+    return render(request, "index.html")
