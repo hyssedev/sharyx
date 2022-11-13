@@ -7,6 +7,7 @@ from rest_framework import generics, status
 from sharyx.settings import CONFIG, UPLOADS_PATH
 from app.utils import upload_file
 from app.models import Uploads
+from sharyx.settings import logger
 
 class upload(generics.ListCreateAPIView):
     # TODO crypt it, hash it or smth
@@ -48,6 +49,7 @@ class delete(generics.ListCreateAPIView):
                 return JsonResponse({"detail":"error trying to delete file."})
         except:
             return JsonResponse({"detail":"incorrect code."})
+        logger.info(f"deleted file. code={code}")
         return JsonResponse({"detail":"succesfully deleted file."})
 
     def post(self, request):
