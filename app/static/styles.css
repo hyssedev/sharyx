@@ -1,11 +1,12 @@
 body {
-    background-color: #222831;
+    background-color: #383434;
 }
 
-.navbar {
-    padding: 1.5%;
+html, body {
+    max-width: 100%;
+    overflow-x: hidden;
 }
 
-h1 {
-    font-size: 15vh;
+.card-body {
+    background-color: #383434;
 }
