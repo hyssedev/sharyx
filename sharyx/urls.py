@@ -24,6 +24,7 @@ urlpatterns = [
     path('admin/', admin.site.urls),
     path('upload/', views.upload.as_view(), name="upload"),
     path('delete/<code>', views.delete.as_view(), name="delete"),
+    path('register', views.register, name="register"),
 
 ]
 
